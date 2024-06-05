@@ -8,19 +8,23 @@ const dotenv = require('dotenv').config();
 const secret = process.env.SECRET_KEY;
 
 const getSignUped = async (req, res) => {
-    const {name, email, password, roles} = req.body;
+    const {email, password, confirmedPassword} = req.body;
 
     try{
         const user = await User.findOne({email: email});
+
         if(user){
             return res.status(400).json({error: 'The user exists for the given email id.'});
+        }
+        if(password === confirmedPassword){
+            return res.status(400).json({message: "The password and confirmed password doesn't match."})
         }
         if(!validator.validate(email)){
             return res.status(400).json({error: 'Email id is not right.'})
         }
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
-        const newUser = new User({name, email, password: hash, roles});
+        const newUser = new User({email, password: hash});
         await newUser.save();
         res.status(201).json({message: 'The user has been created for the given credentials.'})
     }catch(err){

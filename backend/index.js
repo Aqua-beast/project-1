@@ -2,12 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRouter = require('./routes/AuthRouter');
-
+const cors = require('cors');
 
 dotenv.config();
 
 // creating application
 const app = express();
+
+app.use(cors({
+    origin: "http://localhost:3001"
+}))
 
 // adding middlewares
 app.use(express.json());

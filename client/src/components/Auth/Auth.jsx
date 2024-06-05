@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
-import { RiLockPasswordLine } from "react-icons/ri";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "react-loader-spinner";
 import url from '../../assets/breathe_esg_logo-removebg-preview.png';
+import url1 from "../../assets/google.jpg"
+import url2 from "../../assets/twiiter.png"
+
 
 const Auth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,10 +31,10 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("/auth/signup", userInfo);
-
-      toast(response.data.message);
-
+      const response = await axios.post("http://localhost:3000/auth/signup", userInfo);
+  
+      toast(response?.data?.message);
+      console.log("resposne", response)
       setTimeout(() => {
         setLoading(false);
         setIsLoggedIn(true);
@@ -49,7 +49,7 @@ const Auth = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/auth/login", userInfo);
+      const response = await axios.post("http://localhost:3000/auth/login", userInfo);
       toast(response.data.message);
       setTimeout(() => {
         Navigate("home");
@@ -60,14 +60,7 @@ const Auth = () => {
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUserInfo({
-      password: "",
-      email: "",
-      confirmedPassword: "",
-    });
-  };
+
 
   return (
     <div className="auth-container">
@@ -86,65 +79,61 @@ const Auth = () => {
       </div>
       {isLoggedIn ? (
         <div className="auth-page">
-          <div></div>
-          <div className="auth-body">
-            <div className="auth-text">
-              <span className="auth-text-head">Login</span>
-            </div>
-            <form className="auth-form" onSubmit={handleLogin}>
-              <div className="auth-form-item">
-                <span className="auth-input-icon">
-                  <MdOutlineEmail />
-                </span>
-                <input
-                  className="auth-input-control"
-                  type="email"
-                  name="email"
-                  placeholder="Email-Id"
-                  value={userInfo.email}
-                  onChange={handleChange}
-                />
-              </div>
-              <br />
-              <div className="auth-form-item">
-                <span className="auth-input-icon">
-                  <RiLockPasswordLine />
-                </span>
-                <input
-                  className="auth-input-control"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={userInfo.password}
-                  onChange={handleChange}
-                />
-              </div>
-              <button
-                className="auth-form-button"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? (
-                  <ProgressBar
-                    height="40"
-                    width="40"
-                    color="rgb(251, 109, 251)"
-                    ariaLabel="progress-bar-loading"
-                  />
-                ) : (
-                  "Login"
-                )}
-              </button>
-              <span className="auth-alternative-text or">or</span>
-              <span
-                className="auth-alternative-text url"
-                onClick={() => setIsLoggedIn(false)}
-              >
-                New User ?
-              </span>
-            </form>
+        <div className="auth-page-img"></div>
+        <div className="auth-body">
+          <div className="auth-text">
+            <span className="auth-text-head">Login</span>
           </div>
+          <form className="auth-form" onSubmit={handleLogin}>
+            <div className="auth-form-item">
+              <span className="auth-input-icon">
+                Email<span className="required">*</span>
+              </span>
+              <input
+                className="auth-input-control"
+                type="email"
+                name="email"
+                placeholder="Your Email Id"
+                value={userInfo.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="auth-form-item">
+              <span className="auth-input-icon">
+                Password <span className="required">*</span>
+              </span>
+              <input
+                className="auth-input-control"
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={userInfo.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="auth-login-buttons">
+              <div className="auth-login-button"><img src={url1} className="img" />Sign up with Google</div>
+              <div className="auth-login-button"><img src={url2} className="img" />Sign up with Twitter</div>
+            </div>
+            <button
+              className="auth-form-button"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? (
+                <ProgressBar
+                  height="40"
+                  width="40"
+                  color="rgb(251, 109, 251)"
+                  ariaLabel="progress-bar-loading"
+                />
+              ) : (
+                "Continue"
+              )}
+            </button>
+          </form>
         </div>
+      </div>
       ) : (
         <div className="auth-page">
           <div className="auth-page-img"></div>
