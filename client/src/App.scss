@@ -198,3 +198,147 @@ $login-bg: #235e4a;
   font-family: "Open Sans";
   font-weight: 400;
 }
+
+// navbar
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure the navbar takes full width */
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.navbar-logo {
+  height: 17px;
+  width: 18px;
+}
+
+.view-name {
+  font-size: 18px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.region-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.region-text {
+  margin-right: 10px;
+}
+
+.down-icon {
+  font-size: 12px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.bell-icon {
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.profile-img {
+  height: 40px; /* Adjust size as needed */
+  width: 40px;
+  border-radius: 50%;
+}
+
+/* DataEntry.css */
+
+.assessment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.assessment-table th, .assessment-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.assessment-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.assessment-table th .svg-inline--fa {
+  margin-right: 8px;
+}
+
+.assessment-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.assessment-table tr:hover {
+  background-color: #ddd;
+}
+
+.low-risk {
+  color: green;
+}
+
+.medium-risk {
+  color: orange;
+}
+
+.high-risk {
+  color: red;
+}
+
+.status-pending {
+  background-color: pink;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.status-complete {
+  background-color: green;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.result-view-text {
+  color: green;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.action-icon {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.risk-message {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px
+}
